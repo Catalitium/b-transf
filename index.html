@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <title>Datos Barriuso</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta property="og:title" content="Datos Barriuso">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="es_ES">
+  <meta name="theme-color" content="#ffffff">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="theme-corporate">
+  <main class="wrap" role="main">
+    <header aria-labelledby="titulo">
+      <h1 id="titulo">Datos Barriuso</h1>
+      <p class="sub">
+        Toque <strong>Copiar</strong> en cada dato o use <strong>Copiar todo</strong> para copiarlos todos.
+      </p>
+    </header>
+
+    <!-- Datos copiables -->
+    <section aria-labelledby="datos-title">
+      <h2 id="datos-title" class="visually-hidden">Datos copiables</h2>
+
+      <div class="rows">
+        <!-- Nombre banco (nuevo) -->
+        <div class="row">
+          <label for="bank">Nombre banco</label>
+          <div class="field">
+            <input
+              id="bank"
+              name="bank"
+              type="text"
+              spellcheck="false"
+              autocomplete="off"
+              readonly
+              value="Banco Nacional de Crédito"
+              aria-readonly="true"
+              aria-describedby="bank-hint" />
+            <button
+              type="button"
+              id="copy-bank"
+              class="icon-btn"
+              aria-label="Copiar nombre del banco"
+              title="Copiar nombre del banco">
+              <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                <path d="M9 2h6a2 2 0 012 2v1h1a2 2 0 012 2v11a2 2 0 01-2 2H8a2 2 0 01-2-2V7a2 2 0 012-2h1V4a2 2 0 012-2zm1 3h4V4h-4v1zM8 7v11h10V7H8z"/>
+              </svg>
+              <span class="visually-hidden">Copiar</span>
+            </button>
+          </div>
+          <span id="bank-hint" class="visually-hidden">Mantenga pulsado para copiar en móviles.</span>
+        </div>
+
+        <!-- Teléfono -->
+        <div class="row">
+          <label for="phone">Número de teléfono</label>
+          <div class="field">
+            <input
+              id="phone"
+              name="phone"
+              type="tel"
+              inputmode="tel"
+              autocomplete="tel"
+              readonly
+              value="04122326668"
+              aria-readonly="true"
+              aria-describedby="phone-hint" />
+            <button
+              type="button"
+              id="copy-phone"
+              class="icon-btn"
+              aria-label="Copiar número de teléfono"
+              title="Copiar número de teléfono">
+              <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                <path d="M9 2h6a2 2 0 012 2v1h1a2 2 0 012 2v11a2 2 0 01-2 2H8a2 2 0 01-2-2V7a2 2 0 012-2h1V4a2 2 0 012-2zm1 3h4V4h-4v1zM8 7v11h10V7H8z"/>
+              </svg>
+              <span class="visually-hidden">Copiar</span>
+            </button>
+          </div>
+          <span id="phone-hint" class="visually-hidden">Mantenga pulsado para copiar en móviles.</span>
+        </div>
+
+        <!-- Cuenta -->
+        <div class="row">
+          <label for="account">Número de cuenta</label>
+          <div class="field">
+            <input
+              id="account"
+              name="account"
+              type="text"
+              spellcheck="false"
+              autocomplete="off"
+              readonly
+              value="9483403"
+              aria-readonly="true"
+              aria-describedby="account-hint" />
+            <button
+              type="button"
+              id="copy-account"
+              class="icon-btn"
+              aria-label="Copiar número de cuenta"
+              title="Copiar número de cuenta">
+              <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                <path d="M9 2h6a2 2 0 012 2v1h1a2 2 0 012 2v11a2 2 0 01-2 2H8a2 2 0 01-2-2V7a2 2 0 012-2h1V4a2 2 0 012-2zm1 3h4V4h-4v1zM8 7v11h10V7H8z"/>
+              </svg>
+              <span class="visually-hidden">Copiar</span>
+            </button>
+          </div>
+          <span id="account-hint" class="visually-hidden">Mantenga pulsado para copiar en móviles.</span>
+        </div>
+      </div>
+
+      <p id="status" class="status" role="status" aria-live="polite" aria-atomic="true"></p>
+    </section>
+
+    <!-- Acción principal -->
+<!-- Acción principal -->
+<section class="sticky" aria-labelledby="acciones-title">
+  <h2 id="acciones-title" class="visually-hidden">Acciones de copiado</h2>
+
+  <!-- New: Cambiar fondo button -->
+  <button
+    type="button"
+    id="change-theme"
+    class="secondary-btn"
+    aria-label="Cambiar fondo de la interfaz"
+    title="Cambiar fondo de la interfaz">
+    🎨 Cambiar fondo
+  </button>
+
+  <!-- Existing: Copiar ambos -->
+  <button
+    type="button"
+    id="copy-both"
+    class="primary-btn"
+    aria-label="Copiar todos los datos"
+    title="Copiar todos los datos">
+    <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+      <path d="M16 1H8a2 2 0 00-2 2v3h2V3h8v4h2V3a2 2 0 00-2-2zM6 8a2 2 0 00-2 2v9a2 2 0 002 2h12a2 2 0 002-2v-9a2 2 0 00-2-2H6zm1 2h10v9H7v-9z"/>
+    </svg>
+    <span>Copiar todos</span>
+  </button>
+
+  <p class="help">Copia todos los datos</p>
+</section>
+    <p class="note">
+      <strong>Nota:</strong> Los datos no deben ser usados para ningún propósito real sin el consentimiento de las partes involucradas.
+    </p>
+  </main>
+  <script src="main.js" defer></script>
+</body>
+</html>

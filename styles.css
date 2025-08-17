@@ -1,0 +1,272 @@
+/* styles.css — Mobile-first, lightweight, accessible (refactored) */
+
+/* ====== Design tokens ====== */
+:root {
+  /* layout */
+  --maxw: 38rem;
+  --space: 1rem;
+  --gap: .75rem;
+  --radius: .5rem;
+  --tap: 2.75rem; /* ≈44px */
+
+  /* typography */
+  --font: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  --base: 16px; /* phones; upscale later */
+
+  /* colors */
+  --bg-top: #fff;
+  --bg-bottom: #f7f7f7;
+  --panel: #fff;
+  --text: #111;
+  --muted: #444;
+  --ink: #000;
+
+  --border-color: #e5e7eb;
+  --border: 1px solid var(--border-color);
+
+  /* buttons */
+  --btn-bg: #fff;
+  --btn-bg-hover: #f0f0f0;
+  --btn-bg-active: #e9e9e9;
+
+  --primary-bg: #111;
+  --primary-fg: #fff;
+  --primary-bg-hover: #1a1a1a;
+  --primary-bg-active: #0a0a0a;
+}
+
+* { box-sizing: border-box; }
+html, body { height: 100%; }
+
+body.theme-corporate {
+  margin: 0;
+  font-family: var(--font);
+  font-size: var(--base);
+  line-height: 1.5;
+  color: var(--text);
+  background: linear-gradient(to bottom, var(--bg-top), var(--bg-bottom));
+  -webkit-text-size-adjust: 100%;
+}
+
+/* ====== Wrapper & sections ====== */
+.wrap {
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding: .75rem; /* tighter on phones */
+  padding-bottom: calc(env(safe-area-inset-bottom, 0) + 4.25rem); /* room for sticky */
+}
+
+header, section, .sticky {
+  border: var(--border);
+  background: var(--panel);
+  padding: .75rem;
+}
+
+header { margin-bottom: var(--space); }
+section + section { margin-top: var(--space); }
+
+/* ====== Type ====== */
+h1 {
+  margin: 0;
+  font-weight: 700;
+  line-height: 1.2;
+  font-size: clamp(1.25rem, 4.5vw, 1.6rem);
+}
+.sub {
+  margin-top: .25rem;
+  font-size: .95rem;
+  color: var(--muted);
+}
+
+/* ====== Form layout ====== */
+.rows { display: grid; gap: .75rem; }
+.row  { display: grid; grid-template-columns: 1fr; gap: .5rem; min-width: 0; }
+label { font-weight: 600; }
+
+.field {
+  display: grid;
+  grid-template-columns: 1fr auto; /* input + icon button on one row even on phones */
+  gap: .5rem;
+  align-items: center;
+  min-width: 0;
+}
+
+/* ====== Inputs ====== */
+input[type="text"],
+input[type="tel"] {
+  width: 100%;
+  min-height: 2.5rem; /* ≥40px, still tappable */
+  padding: .6rem .7rem;
+  border: var(--border);
+  border-radius: var(--radius);
+  background: #fff;
+  color: var(--text);
+  font: inherit;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ====== Buttons (base) ====== */
+button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: .5rem;
+  min-height: var(--tap);
+  padding: .6rem .9rem;
+  border-radius: 999px;
+  border: var(--border);
+  background: var(--btn-bg);
+  color: var(--text);
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+  text-align: center;
+  transition: background .15s ease, transform .05s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+button:hover  { background: var(--btn-bg-hover); }
+button:active { background: var(--btn-bg-active); transform: translateY(1px); }
+
+/* ====== Icon-only copy buttons ====== */
+.icon-btn {
+  width: 2.5rem;
+  min-width: 2.5rem;
+  min-height: 2.5rem;
+  padding: 0;
+  border-color: transparent;
+  background: #f6f6f6;
+}
+.icon-btn:hover  { background: #eee; }
+.icon-btn:active { background: #e9e9e9; }
+.icon-btn::before {
+  content: "";
+  display: block;
+  width: 1rem; height: 1rem;
+  margin: 0 auto;
+  background: var(--ink);
+  -webkit-mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path d='M9 2h6a2 2 0 012 2v1h1a2 2 0 012 2v11a2 2 0 01-2 2H8a2 2 0 01-2-2V7a2 2 0 012-2h1V4a2 2 0 012-2zm1 3h4V4h-4v1zM8 7v11h10V7H8z'/></svg>");
+  mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path d='M9 2h6a2 2 0 012 2v1h1a2 2 0 012 2v11a2 2 0 01-2 2H8a2 2 0 01-2-2V7a2 2 0 012-2h1V4a2 2 0 012-2zm1 3h4V4h-4v1zM8 7v11h10V7H8z'/></svg>");
+  -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat;
+  -webkit-mask-position: center;  mask-position: center;
+  -webkit-mask-size: contain;     mask-size: contain;
+}
+/* Hide inline SVGs inside icon-only buttons (HTML keeps them for flexibility) */
+.icon-btn .icon { display: none; }
+
+/* ====== Primary sticky button / footer ====== */
+.sticky {
+  position: sticky;
+  bottom: 0;
+  display: grid;
+  gap: .5rem;
+  margin-top: var(--space);
+  background: #fff;
+  padding-bottom: env(safe-area-inset-bottom, 0);
+  box-shadow: 0 -6px 12px rgba(0,0,0,.04);
+  border-top: 1px solid #eee;
+  z-index: 10;
+}
+
+.primary-btn {
+  width: 100%;
+  font-size: .95rem;
+  padding: .8rem 1rem;
+  color: var(--primary-fg);
+  background: var(--primary-bg);
+  border-color: #000;
+  border-radius: 2rem;
+}
+.primary-btn:hover  { background: var(--primary-bg-hover); }
+.primary-btn:active { background: var(--primary-bg-active); transform: translateY(1px); }
+.primary-btn .icon { width: 1rem; height: 1rem; }
+
+/* ====== Focus & status ====== */
+:where(a, button, input):focus,
+:where(a, button, input):focus-visible {
+  outline: 3px solid #000;
+  outline-offset: 3px;
+  border-radius: var(--radius);
+}
+
+.status {
+  margin-top: var(--space);
+  font-size: .95rem;
+  opacity: .9;
+  min-height: 1.2em;
+}
+
+.help {
+  margin: 0;
+  font-size: .9rem;
+  color: var(--muted);
+}
+
+/* ====== Desktop / larger screens ====== */
+@media (min-width: 40rem) {
+  body { font-size: 18px; } /* restore comfy size on wider screens */
+
+  .row {
+    grid-template-columns: 14rem 1fr auto; /* tidy label column */
+    align-items: center;
+  }
+  label { white-space: nowrap; }
+  .field {
+    grid-template-columns: 1fr auto;
+    column-gap: var(--gap);
+  }
+
+  /* give non-icon buttons a sensible min width only when there’s room */
+  button:not(.icon-btn) { min-width: 8.5rem; }
+}
+
+@media (min-width: 48rem) {
+  /* compact, right-aligned sticky CTA on laptops/desktops */
+  .sticky {
+    grid-auto-flow: column;
+    grid-auto-columns: max-content;
+    justify-content: end;
+    align-items: center;
+    gap: .75rem;
+    padding: .75rem 1rem;
+  }
+  .primary-btn { width: auto; font-size: 1rem; padding: .65rem .95rem; }
+}
+
+/* ====== Motion preference ====== */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: .001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .001ms !important;
+  }
+}
+
+/* ====== Visually hidden (accessible) ====== */
+.visually-hidden {
+  position: absolute !important;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0,0,0,0);
+  white-space: nowrap; border: 0;
+}
+.note {
+  font-style: normal;   /* not cursive */
+  font-size: 0.55rem;   /* smaller */
+  color: #666;          /* muted grey */
+  margin-top: 0.5rem;
+  opacity: 0.8;         /* subtle */
+}
+
+header h1 {
+  text-align: center;
+  width: 100%;
+}
+
+/* Optional: center the subtitle text too */
+header .sub {
+  text-align: center;
+  max-width: 30rem;    /* keeps it readable on big screens */
+  margin-left: auto;
+  margin-right: auto;
+}
